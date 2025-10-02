@@ -1,17 +1,27 @@
 import os
+import sys
 import subprocess
 import streamlit as st
-load_dotenv()
-st.set_page_config(page_title="Sahayak - ASHA Worker Assistant", page_icon="👩‍⚕️", layout="wide")
 from dotenv import load_dotenv
-import sys
-with st.spinner("Running vector embedding, please wait... ⏳"):
+# ---- STREAMLIT UI ----
+# Set page config
+st.set_page_config(page_title="Sahayak - ASHA Worker Assistant", page_icon="👩‍⚕️", layout="wide")
+load_dotenv()
+VECTOR_FLAG_FILE = "vector_initialized.flag"
+
+# Run vector_embedding.py only once globally
+if not os.path.exists(VECTOR_FLAG_FILE):
+    with st.spinner("Initializing vector embeddings for the first time... ⏳"):
         try:
-            # This will run vector_embedding.py using the same Python interpreter
             subprocess.run([sys.executable, "vector_embedding.py"], check=True)
-            st.success("Vector embedding completed successfully ✅")
+            # Create a flag file so next users skip this step
+            with open(VECTOR_FLAG_FILE, "w") as f:
+                f.write("done")
+            st.success("Vector embeddings initialized successfully ✅")
         except subprocess.CalledProcessError:
-            st.error("Failed to run vector_embedding.py ❌")
+            st.error("Failed to initialize vector embeddings ❌")
+else:
+    st.info("Vector embeddings already initialized. Using existing database 🔹")
 #Cerebras
 try:
     from cerebras.cloud.sdk import Cerebras
@@ -23,9 +33,9 @@ except ImportError:
 import chromadb
 from sentence_transformers import SentenceTransformer
 
+load_dotenv()
 
-
-CHROMA_DB = os.path.join(os.getcwd(), "data", "chroma.sqlite3")
+CHROMA_DB = os.path.join("data", "chroma.sqlite3")
 EMBEDDING_MODEL_NAME = "all-MiniLM-L6-v2"
 CEREBRAS_MODEL_NAME = "llama-4-scout-17b-16e-instruct"
 TOP_K = 1
@@ -107,8 +117,7 @@ def initialize_backend():
 
     # Find an existing collection
     try:
-        collections = db.list_collections()
-        st.write("Collections in DB:", collections)
+        cols = db.list_collections()
     except Exception as e:
         st.error(translations["en"]["chroma_error"].format(e))
         return client, embedder, None
@@ -129,7 +138,7 @@ def initialize_backend():
             collection = db.get_collection(name=name)
         except Exception:
             try:
-                collection = db.get_or_create_collection(name=langchain)
+                collection = db.get_or_create_collection(name=name)
             except Exception as e:
                 st.warning(translations["en"]["collection_error"].format(name, e))
                 collection = None
@@ -137,7 +146,6 @@ def initialize_backend():
         # Create new collection
         try:
             collection = db.get_or_create_collection(name="asha_temp")
-            st.write(collection)
         except Exception:
             st.warning(translations["en"]["no_collection"])
             collection = None
@@ -199,8 +207,6 @@ if "language" not in st.session_state:
 if "recent_questions" not in st.session_state:
     st.session_state.recent_questions = []
 
-# ---- STREAMLIT UI ----
-# Set page config
 
 
 # Custom CSS for enhanced UI
