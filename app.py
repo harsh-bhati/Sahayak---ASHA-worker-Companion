@@ -19,7 +19,8 @@ import chromadb
 from sentence_transformers import SentenceTransformer
 
 load_dotenv()
-CHROMA_DATA_DIR = os.path.join("data")
+
+CHROMA_DB = os.path.join("data", "chroma.sqlite3")
 EMBEDDING_MODEL_NAME = "all-MiniLM-L6-v2"
 CEREBRAS_MODEL_NAME = "llama-4-scout-17b-16e-instruct"
 TOP_K = 1
@@ -96,7 +97,7 @@ def initialize_backend():
     embedder = SentenceTransformer(EMBEDDING_MODEL_NAME)
 
     # Chroma persistent client
-    chroma_path = os.path.join(CHROMA_DATA_DIR, os.listdir(CHROMA_DATA_DIR)[0]) 
+    chroma_path = CHROMA_DB if os.path.isdir(CHROMA_DB) else os.path.dirname(CHROMA_DB)
     db = chromadb.PersistentClient(path=chroma_path)
 
     # Find an existing collection
@@ -191,6 +192,9 @@ if "language" not in st.session_state:
 if "recent_questions" not in st.session_state:
     st.session_state.recent_questions = []
 
+# ---- STREAMLIT UI ----
+# Set page config
+st.set_page_config(page_title="Sahayak - ASHA Worker Assistant", page_icon="👩‍⚕️", layout="wide")
 
 # Custom CSS for enhanced UI
 st.markdown("""
@@ -354,15 +358,7 @@ st.markdown("""
 # Main header with language support
 st.markdown("<div class='main-header'>", unsafe_allow_html=True)
 # st.markdown(f"<h1 class='main-title'>{translations[st.session_state.language]['title']}</h1>", unsafe_allow_html=True)
-# Main Title
-st.markdown(
-    """
-    <h1 style='text-align: center; color: #2c3e50;'>
-        Sahayak – Your ASHA Companion 👩‍⚕️
-    </h1>
-    """,
-    unsafe_allow_html=True
-)
+
 # Tagline
 st.markdown(
     """
