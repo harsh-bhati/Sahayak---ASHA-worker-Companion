@@ -1,5 +1,5 @@
 # Sahayak - ASHA worker Companion
-🚀 Live Demo: [Sahayak - ASHA Worker Companion](https://harsh-sahayak.streamlit.app/]
+🚀 Live Demo: (https://harsh-sahayak.streamlit.app/)
 
 
 Sahayak is a Streamlit-based application designed to assist ASHA (Accredited Social Health Activist) workers in India. 
@@ -75,32 +75,44 @@ This application has the potential to assist 900,000 ASHA workers across India, 
 
 ## Dependencies
 
-# Core libraries
-streamlit==1.50.0
-numpy==2.2.6
-pandas==2.3.3
-scikit-learn==1.7.2
-scipy==1.15.3
+### Core libraries
+ ```javascript
+   streamlit==1.50.0
+   numpy==2.2.6
+   pandas==2.3.3
+   scikit-learn==1.7.2
+   scipy==1.15.3
+ ```
 
-# NLP / Embeddings
-sentence-transformers==5.1.1
-transformers==4.56.2
-huggingface-hub==0.35.3
+### NLP / Embeddings
+ ```javascript
+   sentence-transformers==5.1.1
+   transformers==4.56.2
+   huggingface-hub==0.35.3
+ ```
 
-# LangChain
-langchain==0.3.27
-langchain-huggingface==0.3.1
-langchain-community==0.3.30
-langchain-core==0.3.76
+### LangChain
+ ```javascript
+   langchain==0.3.27
+   langchain-huggingface==0.3.1
+   langchain-community==0.3.30
+   langchain-core==0.3.76
+ ```
 
-# Vector DB
-chromadb==1.1.0
+### Vector DB
+ ```javascript
+   chromadb==1.1.0
+ ```
 
-# Backend / API
-cerebras_cloud_sdk==1.50.1
-python-dotenv==1.1.1
-requests==2.32.5
+### Backend / API
+ ```javascript
+   cerebras_cloud_sdk==1.50.1
+   python-dotenv==1.1.1
+   requests==2.32.5
+ ```
 
-# Optional / Utilities
-tqdm==4.67.1
-rich==14.1.0
+### Optional / Utilities
+ ```javascript
+   tqdm==4.67.1
+   rich==14.1.0
+ ```
