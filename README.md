@@ -1,6 +1,9 @@
 # Sahayak - ASHA worker Companion
+Live Demo: [Sahayak - ASHA Worker Assistant](https://harsh-sahayak.streamlit.app/]
 
-Sahayak is a Streamlit-based application designed to assist ASHA (Accredited Social Health Activist) workers in India with health information lookup, medical guidance, patient care recommendations, and community health resources. This is taken via the help of books provided by the government. [Go to Government Health Resources](https://nhm.gov.in/index1.php?lang=1&level=3&sublinkid=184&lid=257)
+Sahayak is a Streamlit-based application designed to assist ASHA (Accredited Social Health Activist) workers in India. 
+I developed a custom vector database by processing the official PDFs and guideline documents provided by government sources for ASHA workers. 
+Using advanced embedding techniques, the documents were transformed into a structured, searchable knowledge base, enabling accurate and context-aware responses. This ensures that all information is sourced from authoritative government material rather than general internet data, making the system reliable, precise, and fully aligned with official guidelines.[Go to Government Health Resources](https://nhm.gov.in/index1.php?lang=1&level=3&sublinkid=184&lid=257)
 
 
 
