@@ -3,6 +3,7 @@ import subprocess
 import streamlit as st
 st.set_page_config(page_title="Sahayak - ASHA Worker Assistant", page_icon="👩‍⚕️", layout="wide")
 from dotenv import load_dotenv
+import sys
 with st.spinner("Running vector embedding, please wait... ⏳"):
         try:
             # This will run vector_embedding.py using the same Python interpreter
