@@ -121,7 +121,6 @@ def initialize_backend():
         except Exception:
             try:
                 collection = db.get_or_create_collection(name=langchain)
-                st.write(collection)
             except Exception as e:
                 st.warning(translations["en"]["collection_error"].format(name, e))
                 collection = None
@@ -129,6 +128,7 @@ def initialize_backend():
         # Create new collection
         try:
             collection = db.get_or_create_collection(name="asha_temp")
+            st.write(collection)
         except Exception:
             st.warning(translations["en"]["no_collection"])
             collection = None
