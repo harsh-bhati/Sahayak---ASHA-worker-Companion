@@ -98,7 +98,8 @@ def initialize_backend():
 
     # Find an existing collection
     try:
-        cols = db.list_collections()
+        collections = db.list_collections()
+        st.write("Collections in DB:", collections)
     except Exception as e:
         st.error(translations["en"]["chroma_error"].format(e))
         return client, embedder, None
@@ -120,6 +121,7 @@ def initialize_backend():
         except Exception:
             try:
                 collection = db.get_or_create_collection(name=langchain)
+                st.write(collection)
             except Exception as e:
                 st.warning(translations["en"]["collection_error"].format(name, e))
                 collection = None
