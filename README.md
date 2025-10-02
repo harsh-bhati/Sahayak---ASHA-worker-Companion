@@ -16,23 +16,23 @@ Sahayak is a Streamlit-based application designed to assist ASHA (Accredited Soc
 
 ## 💻 Technologies Used
 
-### 1️⃣ Generative AI / LLM
+### Generative AI / LLM
 - **LLaMA** – Large Language Model for answering health questions  
 - **Cerebras API** – Accessing LLaMA models   
 
-### 2️⃣ Semantic Search / Knowledge Retrieval
+### Semantic Search / Knowledge Retrieval
 - **ChromaDB** – Vector database for storing and searching health PDFs  
 - **SentenceTransformers** – Creating embeddings for documents  
 
-### 3️⃣ Web / Frontend
+### Web / Frontend
 - **Streamlit** – Web app framework for interactive interface  
 - **HTML, CSS** – Styling the web interface  
 
-### 4️⃣ Backend / Logic
+### Backend / Logic
 - **Python** – Core language for LLM integration, document search, and API calls  
 - **APIs / HTTP requests** – Connecting to Cerebras API for LLM responses  
 
-### 5️⃣ Data / Resources
+### Data / Resources
 - **Government Health PDFs** – Official resources for ASHA workers
 
 ## Installation
