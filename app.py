@@ -1,10 +1,6 @@
 import os
 import streamlit as st
-st.set_page_config(
-    page_title="Sahayak - ASHA Worker Assistant",
-    page_icon="👩‍⚕️",
-    layout="wide"
-)
+st.set_page_config(page_title="Sahayak - ASHA Worker Assistant", page_icon="👩‍⚕️", layout="wide")
 from dotenv import load_dotenv
 
 #Cerebras
@@ -123,7 +119,7 @@ def initialize_backend():
             collection = db.get_collection(name=name)
         except Exception:
             try:
-                collection = db.get_or_create_collection(name=name)
+                collection = db.get_or_create_collection(name=langchain)
             except Exception as e:
                 st.warning(translations["en"]["collection_error"].format(name, e))
                 collection = None
@@ -194,7 +190,7 @@ if "recent_questions" not in st.session_state:
 
 # ---- STREAMLIT UI ----
 # Set page config
-st.set_page_config(page_title="Sahayak - ASHA Worker Assistant", page_icon="👩‍⚕️", layout="wide")
+
 
 # Custom CSS for enhanced UI
 st.markdown("""
@@ -358,7 +354,15 @@ st.markdown("""
 # Main header with language support
 st.markdown("<div class='main-header'>", unsafe_allow_html=True)
 # st.markdown(f"<h1 class='main-title'>{translations[st.session_state.language]['title']}</h1>", unsafe_allow_html=True)
-
+# Main Title
+st.markdown(
+    """
+    <h1 style='text-align: center; color: #2c3e50;'>
+        Sahayak – Your ASHA Companion 👩‍⚕️
+    </h1>
+    """,
+    unsafe_allow_html=True
+)
 # Tagline
 st.markdown(
     """
