@@ -3,13 +3,11 @@ import sys
 import subprocess
 import streamlit as st
 from dotenv import load_dotenv
-# ---- STREAMLIT UI ----
-# Set page config
+
 st.set_page_config(page_title="Sahayak - ASHA Worker Assistant", page_icon="👩‍⚕️", layout="wide")
 load_dotenv()
 VECTOR_FLAG_FILE = "vector_initialized.flag"
 
-# Run vector_embedding.py only once globally
 if not os.path.exists(VECTOR_FLAG_FILE):
     with st.spinner("Initializing vector embeddings for the first time... ⏳"):
         try:
@@ -20,8 +18,6 @@ if not os.path.exists(VECTOR_FLAG_FILE):
             st.success("Vector embeddings initialized successfully ✅")
         except subprocess.CalledProcessError:
             st.error("Failed to initialize vector embeddings ❌")
-else:
-    st.info("Vector embeddings already initialized. Using existing database 🔹")
 #Cerebras
 try:
     from cerebras.cloud.sdk import Cerebras
@@ -155,8 +151,7 @@ def initialize_backend():
 # Initialize backend components
 cerebras_client, embedding_model, collection = initialize_backend()
 
-# ---- HELPERS ----
-@st.cache_data(ttl=300)  # Cache for 5 minutes
+@st.cache_data(ttl=300)  
 def get_relevant_docs_via_chroma(query: str, top_k: int = TOP_K):
     if not collection:
         return []
@@ -174,7 +169,7 @@ def get_relevant_docs_via_chroma(query: str, top_k: int = TOP_K):
         st.warning(translations["en"]["chroma_query_error"].format(e))
         return []
 
-@st.cache_data(ttl=300)  # Cache for 5 minutes
+@st.cache_data(ttl=300) 
 def ask_cerebras(_client, question: str, context_docs: list):
     if not CEREBRAS_AVAILABLE or not _client:
         return "Cerebras API is not available. Please install the SDK and set up your API key."
@@ -200,7 +195,6 @@ def ask_cerebras(_client, question: str, context_docs: list):
     except Exception as e:
         return translations["en"]["api_call_error"].format(e)
 
-# ---- SESSION STATE ----
 if "language" not in st.session_state:
     st.session_state.language = "en"
 
@@ -208,8 +202,6 @@ if "recent_questions" not in st.session_state:
     st.session_state.recent_questions = []
 
 
-
-# Custom CSS for enhanced UI
 st.markdown("""
 <style>
     /* Main styling */
@@ -334,7 +326,6 @@ st.markdown("""
         color: white;
     }
     
-    /* Input styling */
     .stTextInput>div>div>input {
         border-radius: 8px;
         border: 2px solid #3498db;
@@ -342,7 +333,6 @@ st.markdown("""
         font-size: 1.1rem;
     }
     
-    /* Subheader styling */
     .section-header {
         color: #2c3e50;
         font-size: 1.5rem;
@@ -353,13 +343,11 @@ st.markdown("""
         border-bottom: 3px solid #3498db;
     }
     
-    /* Info and warning styling */
     .stAlert {
         border-radius: 8px;
         margin-bottom: 1rem;
     }
     
-    /* Spinner styling */
     .stSpinner>div {
         color: #3498db;
         font-size: 1.1rem;
@@ -368,10 +356,9 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Main header with language support
 st.markdown("<div class='main-header'>", unsafe_allow_html=True)
 # st.markdown(f"<h1 class='main-title'>{translations[st.session_state.language]['title']}</h1>", unsafe_allow_html=True)
-# Main Title
+
 st.markdown(
     """
     <h1 style='text-align: center; color: #2c3e50;'>
@@ -380,7 +367,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-# Tagline
+
 st.markdown(
     """
     <p style='text-align: center; font-size:18px; color: #555;'>
@@ -394,7 +381,6 @@ st.markdown(
 )
 st.markdown("</div>", unsafe_allow_html=True)
 
-# Language selector in sidebar
 with st.sidebar:
     st.header("⚙️ Settings")
     st.session_state.language = st.selectbox(
@@ -424,19 +410,16 @@ with st.sidebar:
         - सामुदायिक स्वास्थ्य संसाधन
         """)
 
-# Get translations for current language
 t = translations[st.session_state.language]
 
-# Recent questions in sidebar
 with st.sidebar:
     if st.session_state.recent_questions:
         st.markdown("<div class='recent-card card'>", unsafe_allow_html=True)
         st.subheader(t["recent_questions"])
-        for q in st.session_state.recent_questions[-5:]:  # Show last 5 questions
+        for q in st.session_state.recent_questions[-5:]:
             st.markdown(f"- {q}")
         st.markdown("</div>", unsafe_allow_html=True)
 
-# Main content area with tabs
 col1, col2 = st.columns([5, 1])
 
 with col1:
@@ -455,18 +438,14 @@ with col1:
                 if not learning_query or not learning_query.strip():
                     st.warning(t["empty_question"])
                 else:
-                    # Add to recent questions
                     if learning_query not in st.session_state.recent_questions:
                         st.session_state.recent_questions.append(learning_query)
                     
-                    # Get relevant documents
                     with st.spinner(t["searching_db"]):
                         docs = get_relevant_docs_via_chroma(learning_query, TOP_K)
-                    # Get answer from Cerebras
                     with st.spinner(t["getting_answer"]):
                         answer = ask_cerebras(cerebras_client, learning_query, docs)
 
-                    # Display response in main content area
                     st.markdown(f"<h2 class='section-header'>{t['response_header']}</h2>", unsafe_allow_html=True)
                     st.markdown("<div class='response-card card'>", unsafe_allow_html=True)
                     st.write(answer)
@@ -494,25 +473,20 @@ with col1:
                 if not urgent_query or not urgent_query.strip():
                     st.warning(t["empty_question"])
                 else:
-                    # Add to recent questions
                     if urgent_query not in st.session_state.recent_questions:
                         st.session_state.recent_questions.append(urgent_query)
                     
-                    # Get relevant documents
                     with st.spinner(t["searching_db"]):
                         docs = get_relevant_docs_via_chroma(urgent_query, TOP_K)
 
-                    # Get answer from Cerebras
                     with st.spinner(t["getting_answer"]):
                         answer = ask_cerebras(cerebras_client, urgent_query, docs)
 
-                    # Display response in main content area
                     st.markdown(f"<h2 class='section-header'>{t['response_header']}</h2>", unsafe_allow_html=True)
                     st.markdown("<div class='response-card card'>", unsafe_allow_html=True)
                     st.write(answer)
                     st.markdown("</div>", unsafe_allow_html=True)
 
-                    # Display context in main content area
                     st.markdown(f"<h2 class='section-header'>{t['context_header']}</h2>", unsafe_allow_html=True)
                     st.markdown("<div class='context-card card'>", unsafe_allow_html=True)
                     if docs:
@@ -525,7 +499,6 @@ with col1:
 
 with col2:
     st.markdown("### 💡 Example Questions")
-    # st.markdown("<div class='card'>", unsafe_allow_html=True)
     if st.session_state.language == "en":
         st.markdown("""
         - What are the symptoms of malaria?
