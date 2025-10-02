@@ -1,5 +1,10 @@
 import os
 import streamlit as st
+st.set_page_config(
+    page_title="Sahayak - ASHA Worker Assistant",
+    page_icon="👩‍⚕️",
+    layout="wide"
+)
 from dotenv import load_dotenv
 
 #Cerebras
@@ -187,9 +192,6 @@ if "language" not in st.session_state:
 if "recent_questions" not in st.session_state:
     st.session_state.recent_questions = []
 
-# ---- STREAMLIT UI ----
-# Set page config
-st.set_page_config(page_title="Sahayak - ASHA Worker Assistant", page_icon="👩‍⚕️", layout="wide")
 
 # Custom CSS for enhanced UI
 st.markdown("""
