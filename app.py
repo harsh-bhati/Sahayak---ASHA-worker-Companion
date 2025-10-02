@@ -20,7 +20,7 @@ from sentence_transformers import SentenceTransformer
 
 load_dotenv()
 
-CHROMA_DB = os.path.join("data", "chroma.sqlite3")
+CHROMA_DB = os.path.join("data", "8ce3c55d-763e-4d73-9317-9e1a5e2cd40c")
 EMBEDDING_MODEL_NAME = "all-MiniLM-L6-v2"
 CEREBRAS_MODEL_NAME = "llama-4-scout-17b-16e-instruct"
 TOP_K = 1
