@@ -2,7 +2,13 @@ import os
 import streamlit as st
 st.set_page_config(page_title="Sahayak - ASHA Worker Assistant", page_icon="👩‍⚕️", layout="wide")
 from dotenv import load_dotenv
-
+with st.spinner("Running vector embedding, please wait... ⏳"):
+        try:
+            # This will run vector_embedding.py using the same Python interpreter
+            subprocess.run([sys.executable, "vector_embedding.py"], check=True)
+            st.success("Vector embedding completed successfully ✅")
+        except subprocess.CalledProcessError:
+            st.error("Failed to run vector_embedding.py ❌")
 #Cerebras
 try:
     from cerebras.cloud.sdk import Cerebras
