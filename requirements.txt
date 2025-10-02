@@ -3,3 +3,7 @@ python-dotenv
 chromadb==0.4.2
 sentence-transformers==2.2.2
 cerebras-cloud-sdk  # For Cerebras API integration
+sentence-transformers==2.2.2
+huggingface_hub==0.17.4
+torch>=2.1.0
+transformers>=4.30.0
