@@ -1,6 +1,7 @@
 import os
 import subprocess
 import streamlit as st
+load_dotenv()
 st.set_page_config(page_title="Sahayak - ASHA Worker Assistant", page_icon="👩‍⚕️", layout="wide")
 from dotenv import load_dotenv
 import sys
@@ -22,7 +23,7 @@ except ImportError:
 import chromadb
 from sentence_transformers import SentenceTransformer
 
-load_dotenv()
+
 
 CHROMA_DB = os.path.join(os.getcwd(), "data", "chroma.sqlite3")
 EMBEDDING_MODEL_NAME = "all-MiniLM-L6-v2"
