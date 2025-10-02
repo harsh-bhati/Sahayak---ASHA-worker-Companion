@@ -19,8 +19,7 @@ import chromadb
 from sentence_transformers import SentenceTransformer
 
 load_dotenv()
-
-CHROMA_DB = os.path.join("data", "8ce3c55d-763e-4d73-9317-9e1a5e2cd40c")
+CHROMA_DATA_DIR = os.path.join("data")
 EMBEDDING_MODEL_NAME = "all-MiniLM-L6-v2"
 CEREBRAS_MODEL_NAME = "llama-4-scout-17b-16e-instruct"
 TOP_K = 1
@@ -97,7 +96,7 @@ def initialize_backend():
     embedder = SentenceTransformer(EMBEDDING_MODEL_NAME)
 
     # Chroma persistent client
-    chroma_path = CHROMA_DB if os.path.isdir(CHROMA_DB) else os.path.dirname(CHROMA_DB)
+    chroma_path = os.path.join(CHROMA_DATA_DIR, os.listdir(CHROMA_DATA_DIR)[0]) 
     db = chromadb.PersistentClient(path=chroma_path)
 
     # Find an existing collection
