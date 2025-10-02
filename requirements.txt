@@ -1,13 +1,10 @@
-python-dotenv
-chromadb==0.4.2
-sentence-transformers==2.2.2
-cerebras-cloud-sdk  # For Cerebras API integration
 streamlit==1.26.0
+rich>=10.14.0,<14
+markdown-it-py==2.2.0
+mdurl==0.1.1
+pygments>=2.13,<3
 sentence-transformers==2.2.2
-huggingface_hub==0.17.4
-torch>=2.1.0
-transformers>=4.30.0
-rich==14.1.0
-pygments==2.19.2
-markdown-it-py==4.0.0
-mdurl==0.1.2
+chromadb==0.4.2
+cerebras-cloud-sdk==1.50.1
+huggingface_hub>=0.16.4,<0.17
+python-dotenv==1.1.1
