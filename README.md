@@ -5,9 +5,14 @@
 Watch the video demonstration : (https://drive.google.com/file/d/1SWF3RMpSEc3NjkN-DQMHnddVpZma3ay0/view?usp=sharing)
 
 
-Sahayak is a Streamlit-based application designed to assist ASHA (Accredited Social Health Activist) workers in India. 
+Sahayak is a Gen AI application designed to assist ASHA (Accredited Social Health Activist) workers in India. 
+
+
 I developed a custom vector database by processing the official PDFs and guideline documents provided by government sources for ASHA workers. 
-Using advanced embedding techniques, the documents were transformed into a structured, searchable knowledge base, enabling accurate and context-aware responses. This ensures that all information is sourced from authoritative government material rather than general internet data, making the system reliable, precise, and fully aligned with official guidelines.[Go to Government Health Resources](https://nhm.gov.in/index1.php?lang=1&level=3&sublinkid=184&lid=257)
+Using advanced embedding techniques, the documents were transformed into a structured, searchable knowledge base, enabling accurate and context-aware responses. 
+
+
+This ensures that all information is sourced from authoritative government material rather than general internet data, making the system reliable, precise, and fully aligned with official guidelines.[Go to Government Health Resources](https://nhm.gov.in/index1.php?lang=1&level=3&sublinkid=184&lid=257)
 
 
 
