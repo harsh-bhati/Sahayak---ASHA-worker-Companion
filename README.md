@@ -9,7 +9,7 @@ Sahayak is a generative AI-powered assistant designed to empower India's ASHA (A
 
 By leveraging a custom vector database built exclusively from official government health documents and the LLaMA language model, the application delivers accurate, context-aware responses for both general learning and urgent medical situations. 
 
-Featuring a user-friendly interface built with Streamlit, Sahayak aims to significantly enhance the efficiency and effectiveness of over 900,000 ASHA workers, ensuring they have crucial, government-verified guidance at their fingertips to better serve their communities.
+Sahayak aims to significantly enhance the efficiency and effectiveness of over 900,000 ASHA workers, ensuring they have crucial, government-verified guidance at their fingertips to better serve their communities.
 
 [Go to Government Health Resources](https://nhm.gov.in/index1.php?lang=1&level=3&sublinkid=184&lid=257)
 
