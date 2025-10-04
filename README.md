@@ -2,7 +2,7 @@
 🚀 Live Demo: (https://harsh-sahayak.streamlit.app/)
 
 
-Watch the video demonstration : (https://drive.google.com/file/d/1SWF3RMpSEc3NjkN-DQMHnddVpZma3ay0/view?usp=sharing)
+Watch the video demonstration : [Google drive link to video](https://drive.google.com/file/d/1SWF3RMpSEc3NjkN-DQMHnddVpZma3ay0/view?usp=sharing)
 
 
 Sahayak is a Gen AI application designed to assist ASHA (Accredited Social Health Activist) workers in India. 
