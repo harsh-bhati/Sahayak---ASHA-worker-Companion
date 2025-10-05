@@ -28,7 +28,7 @@ Sahayak aims to significantly enhance the efficiency and effectiveness of over 9
 ## 💻 Technologies Used
 
 ### Generative AI / LLM
-- **LLaMA** – Large Language Model for answering health questions  
+- **LLaMA** – Large Language Model for answering health questions after being trained on our given data and information
 - **Cerebras API** – Accessing LLaMA models   
 
 ### Semantic Search / Knowledge Retrieval
